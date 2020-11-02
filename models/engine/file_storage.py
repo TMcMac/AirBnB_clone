@@ -10,7 +10,7 @@ import os
 class FileStorage:
     '''serializes instances to a JSON file
     and deserializes JSON file to instances'''
-    __file_path = ''
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):
@@ -24,17 +24,20 @@ class FileStorage:
 
     def save(self):
         '''saves all objects to JSON file'''
-        with open(__file_path, 'w') as f:
+        with open(self.__file_path, 'w') as f:
             poindexter = {}
             for key, value in self.__objects.items():
-                poindexter.update({key, value.to_dict()})
+                poindexter.update({key: value.to_dict()})
             json.dump(poindexter, f)
 
     def reload(self):
         '''loads objects from JSON file'''
         try:
-            with open(__file_path) as f:
+            with open(self.__file_path) as f:
                 undead = json.load(f)
-                '''need to reanimate objects from here'''
+                for key, value in undead:
+                    obj_class = value['__class__']
+                    new_zombie = obj_class(**value)
+                    self.new(new_zombie)
         except:
             pass
