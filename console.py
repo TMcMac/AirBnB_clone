@@ -5,14 +5,15 @@ import sys
 from models.base_model import BaseModel
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """
     Class Command line interpreter
     """
     prompt = '(hbnb) '
     classlist = {'BaseModel': BaseModel, 'User': User, 'State': State,
-                   'City': City, 'Amenity': Amenity, 'Place': Place,
-                   'Review': Review}
+                 'City': City, 'Amenity': Amenity, 'Place': Place,
+                 'Review': Review}
 
     def do_create(self, arg):
         """
