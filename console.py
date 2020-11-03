@@ -2,14 +2,33 @@
 '''Command line interpreter for HBNB Clone'''
 import cmd
 import sys
-
+from models.base_model import BaseModel
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """
     Class Command line interpreter
     """
     prompt = '(hbnb) '
-    
+    classlist = {'BaseModel': BaseModel}
+
+    def do_create(self, arg):
+        """
+        Type create and a class name to create an instance of that class
+        """
+        if len(arg) == 0:
+            print("** class name missing **")
+            return
+        new_obj = None
+        for key, value in self.classlist.items():
+            if key == arg:
+                new_obj = value()
+        if new_obj is None:
+            print("** class doesn't exist **")
+            return
+        storage.new(new_obj)
+        storage.save()
+        print(new_obj.id)
 
     def emptyline(self):
         """
