@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
-'''This is the file for the user class'''
-from models import base_model
-BaseModel = base_model.BaseModel
+'''Home file for class User'''
+
+from models.base_model import BaseModel
+
 
 class User(BaseModel):
-    
+    '''used for defining attributes of users'''
+    email = ''
+    password = ''
+    first_name = ''
+    last_name = ''
