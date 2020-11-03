@@ -30,6 +30,64 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
         print(new_obj.id)
 
+    def do_show(self, arg):
+        """
+        Prints the string representation of an instance based on
+        the class name and id.
+        """
+        if len(arg) == 0:
+            print("** class name missing **")
+            return
+        arrrrgs = arg.split(".")
+        if arrrrgs[0] not in self.classlist.keys():
+            print("** class doesn't exist **")
+            return
+        if len(arrrrgs) < 2:
+            print("** instance id missing **")
+            return
+        existing_objects = storage.all()
+        if arg in existing_objects.keys():
+            the_obj = existing_objects[arg]
+            print(the_obj)
+        else:
+            print("** no instance found **")
+
+    def do_destroy(self, arg):
+        """
+        Deletes an instance based on the class name and id
+        (save the change into the JSON file).
+        """
+        if len(arg) == 0:
+            print("** class name missing **")
+            return
+        arrrrgs = arg.split(".")
+        if arrrrgs[0] not in self.classlist.keys():
+            print("** class doesn't exist **")
+            return
+        if len(arrrrgs) < 2:
+            print("** instance id missing **")
+            return
+        existing_objects = storage.all()
+        if arg in existing_objects.keys():
+            del existing_objects[arg]
+            storage.save()
+        else:
+            print("** no instance found **")
+
+    def do_all(self, arg):
+        """
+        Prints all string representation of all instances based or not
+        on the class name.
+        """
+        existing_objects = storage.all()
+        if len(arg) is not 0:
+            for k, v in existing_objects.items():
+                if arg == v.__class__.__name__:
+                    print(v)
+        else:
+            for k, v in existing_objects.items():
+                print(v)
+
     def emptyline(self):
         """
         Reprompts on an emptyline + enter
