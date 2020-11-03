@@ -10,7 +10,9 @@ class HBNBCommand(cmd.Cmd):
     Class Command line interpreter
     """
     prompt = '(hbnb) '
-    classlist = {'BaseModel': BaseModel}
+    classlist = {'BaseModel': BaseModel, 'User': User, 'State': State,
+                   'City': City, 'Amenity': Amenity, 'Place': Place,
+                   'Review': Review}
 
     def do_create(self, arg):
         """
@@ -114,7 +116,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 this_obj = existing_objects[the_key]
                 setattr(this_obj, args[2], args[3])
-                this_obj.save()        
+                this_obj.save()
 
     def emptyline(self):
         """
