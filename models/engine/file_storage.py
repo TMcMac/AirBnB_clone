@@ -34,7 +34,9 @@ class FileStorage:
         '''loads objects from JSON file'''
         from models.base_model import BaseModel
         from models.user import User
-        classes = {'BaseModel': BaseModel, 'User': User}
+        classes = {'BaseModel': BaseModel, 'User': User, 'State': State,
+                   'City': City, 'Amenity': Amenity, 'Place': Place,
+                   'Review': Review}
         try:
             with open(self.__file_path, 'r') as f:
                 book_of_the_dead = json.load(f)
