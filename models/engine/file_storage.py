@@ -33,7 +33,8 @@ class FileStorage:
     def reload(self):
         '''loads objects from JSON file'''
         from models.base_model import BaseModel
-        classes = {'BaseModel': BaseModel}
+        from models.user import User
+        classes = {'BaseModel': BaseModel, 'User': User}
         try:
             with open(self.__file_path, 'r') as f:
                 book_of_the_dead = json.load(f)
