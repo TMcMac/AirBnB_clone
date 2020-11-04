@@ -6,4 +6,3 @@ import unittest
 class TestConsole(unittest.TestCase):
     '''Let's put the console to the test'''
     def test_console(self):
-        

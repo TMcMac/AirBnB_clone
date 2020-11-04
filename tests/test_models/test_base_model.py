@@ -3,6 +3,7 @@
 from unittest import TestCase
 from models.base_model import BaseModel
 
+
 class TestBaseModel(TestCase):
     '''Tests BaseModel'''
     def test_init(self):
