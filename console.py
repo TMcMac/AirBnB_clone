@@ -22,6 +22,40 @@ class HBNBCommand(cmd.Cmd):
                  'City': City, 'Amenity': Amenity, 'Place': Place,
                  'Review': Review}
 
+    def default(self, arg):
+        """
+        Method called on an input line when the command prefix is
+        not recognized. We are using it to look for ClassName.cmd().
+        """
+        if '.' in arg:
+            arg_list = arg.split('.')
+            class_name = arg_list[0]
+            if len(arg_list[1]) < 9:
+                command = arg_list[1][:-2]
+            else:
+                id_split = arg_list[1].split('(')
+                command = id_split[0]
+                inst_id = id_split[1][:-1]
+            if command == 'all':
+                return self.do_all(class_name)
+            elif command == 'count':
+                existing_objs = storage.all()
+                count = 0
+                for k, v in existing_objs.items():
+                    if class_name == v.__class__.__name__:
+                        count += 1
+                print(count)
+            elif command == 'show':
+                return self.do_show(class_name + ' ' + inst_id)
+            elif command == 'destroy':
+                return self.do_destroy(class_name + ' ' + inst_id)
+            else:
+                print("** Command Unrecognized **")
+                return
+        else:
+            print("** Command Unrecognized **")
+            return
+
     def do_create(self, arg):
         """
         Type create and a class name to create an instance of that class
@@ -93,9 +127,12 @@ class HBNBCommand(cmd.Cmd):
         """
         existing_objects = storage.all()
         if len(arg) is not 0:
-            for k, v in existing_objects.items():
-                if arg == v.__class__.__name__:
-                    print(v)
+            if arg not in self.classlist.keys():
+                print("** class doesn't exist **")
+            else:
+                for k, v in existing_objects.items():
+                    if arg == v.__class__.__name__:
+                        print(v)
         else:
             for k, v in existing_objects.items():
                 print(v)
