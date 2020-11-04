@@ -62,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
                     attribute = params[1][1:]
                     value = params[2][1:]
                     return self.do_update(class_name + ' ' + inst_id +
-                                      ' ' + attribute + ' ' + value)
+                                          ' ' + attribute + ' ' + value)
             else:
                 print("** Command Unrecognized **")
                 return
