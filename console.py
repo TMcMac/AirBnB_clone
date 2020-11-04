@@ -53,9 +53,16 @@ class HBNBCommand(cmd.Cmd):
                 params = inst_id.split(',')
                 inst_id = params[0]
                 attribute = params[1][1:]
-                value = params[2][1:]
-                return self.do_update(class_name + ' ' + inst_id +
-                                      ' ' + attribute + ' ' + ' ' + value)
+                if type(params[2]) == str:
+                    value = params[2][1:]
+                    return self.do_update(class_name + ' ' + inst_id +
+                                      ' ' + attribute + ' ' + value)
+                elif type(params[2]) == dict:
+                    attrs = params[2]
+                    for k, v in attrs.items():
+                        self.do_update(class_name + ' ' + inst_id +
+                                      ' ' + str(k) + ' ' + str(v))
+                        return
             else:
                 print("** Command Unrecognized **")
                 return
