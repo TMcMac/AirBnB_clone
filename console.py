@@ -171,7 +171,7 @@ class HBNBCommand(cmd.Cmd):
             elif len(args) < 3:
                 print("** attribute name missing **")
             elif len(args) < 4:
-                print("** attribute value missing **")
+                print("** value missing **")
             else:
                 this_obj = existing_objects[the_key]
                 setattr(this_obj, args[2], args[3])
