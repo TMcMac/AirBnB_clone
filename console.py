@@ -49,6 +49,13 @@ class HBNBCommand(cmd.Cmd):
                 return self.do_show(class_name + ' ' + inst_id)
             elif command == 'destroy':
                 return self.do_destroy(class_name + ' ' + inst_id)
+            elif command == 'update':
+                params = inst_id.split(',')
+                inst_id = params[0]
+                attribute = params[1][1:]
+                value = params[2][1:]
+                return self.do_update(class_name + ' ' + inst_id +
+                                      ' ' + attribute + ' ' + ' ' + value)
             else:
                 print("** Command Unrecognized **")
                 return
