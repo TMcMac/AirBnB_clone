@@ -52,8 +52,8 @@ class HBNBCommand(cmd.Cmd):
             elif command == 'update':
                 params = inst_id.split(',')
                 inst_id = params[0]
-                if '{' in param[1]:
-                    attrs = dict(param[1])
+                if '{' in params[1]:
+                    attrs = dict(params[1])
                     for k, v in attrs.items():
                         self.do_update(class_name + ' ' + inst_id +
                                        ' ' + str(k) + ' ' + str(v))
