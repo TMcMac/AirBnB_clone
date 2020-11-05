@@ -51,15 +51,17 @@ class HBNBCommand(cmd.Cmd):
             elif command == 'destroy':
                 return self.do_destroy(class_name + ' ' + inst_id)
             elif command == 'update':
-                params = inst_id.split(',')
-                inst_id = params[0]
-                if '{' in params[1]:
-                    attrs = json.loads(params[1])
+                if '{' in inst_id:
+                    params = inst_id.split('{')
+                    inst_id = params[0][:-2]
+                    attrs = json.loads('{' + params[1])
                     for k, v in attrs.items():
                         self.do_update(class_name + ' ' + inst_id +
                                        ' ' + str(k) + ' ' + str(v))
                     return
                 else:
+                    params = inst_id.split(',')
+                    inst_id = params[0]
                     attribute = params[1][1:]
                     value = params[2][1:]
                     return self.do_update(class_name + ' ' + inst_id +
