@@ -2,6 +2,7 @@
 '''Command line interpreter for HBNB Clone'''
 
 import cmd
+import json
 import sys
 from models.base_model import BaseModel
 from models.user import User
@@ -53,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
                 params = inst_id.split(',')
                 inst_id = params[0]
                 if '{' in params[1]:
-                    attrs = dict(params[1])
+                    attrs = json.loads(params[1])
                     for k, v in attrs.items():
                         self.do_update(class_name + ' ' + inst_id +
                                        ' ' + str(k) + ' ' + str(v))
@@ -62,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
                     attribute = params[1][1:]
                     value = params[2][1:]
                     return self.do_update(class_name + ' ' + inst_id +
-                                      ' ' + attribute + ' ' + value)
+                                          ' ' + attribute + ' ' + value)
             else:
                 print("** Command Unrecognized **")
                 return
